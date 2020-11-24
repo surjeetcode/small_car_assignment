@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <style>
+        body {
+            background-color: rgb(37, 16, 16);
+            font-family: Verdana, Geneva, Tahoma, sans-serif
+        }
+
+        .container {
+            display: flex;
+            margin: 80px;
+
+        }
+
+        h1 {
+            color: rgb(68, 80, 118);
+        }
+
+        .arrr {
+            color: seashell;
+        }
+
+        #steps {
+            display: flex;
+            flex-direction: column;
+            margin-right: 20px;
+
+
+        }
+
+        .no_reach {
+            font-size: 30px;
+            color: red;
+        }
+
+        .reach {
+            font-size: 30px;
+            color: greenyellow;
+        }
+
+        .main {
+            color: rgb(206, 185, 185);
+            font-size: 20px;
+        }
+
+        .btn {
+            width: 100px;
+            height: 50px;
+            background-color: burlywood;
+            font-family: cursive;
+
+
+        }
+
+        .b_cont {
+            width: 70%;
+            margin: auto;
+        }
+
+        .ss{
+                font-size: 50px;
+                color: yellowgreen;
+
+        }
+    </style>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+</head>
+
+<body>
+
+
+
+
+    <br>
+
+    <p id="par"></p>
+
+    <div class="b_cont">
+        <h1 class="welcome"> Welcome To Car Game</h1>
+        <div id="gernerated_array"></div>
+        <h3 style="color: rgb(233, 233, 243);">Rules>>>>You have to move To 100km With 30Litre Fuel And Milage Of the Car is 1km/litre
+            . You are Free To Select The Petrol Pump At Some Locations. You Have Enter Down in Input </h3>
+        <div class="container1">
+            <div class="container">
+                <div id="steps"></div>
+                <div id="petrr"></div>
+            </div>
+        </div>
+        <div id="result"></div>
+        <div id="elementss"></div>
+        <span></span>
+        <button onclick="start()" class="btn">Start</button>
+    </div>
+
+    <script>
+
+        function start() {
+            location.reload()
+        
+        }
+        var x = 0;
+        var array = [];
+        
+
+        for (let i = 0; i < 5; i++) {
+            array.push(prompt('Pls Enter Number To Start the Game ' + (i + 1)))
+        }
+        console.log(array);
+
+
+
+
+        function ramdomNum() {
+            const min = 1
+            const max = 6
+
+            const step1 = max - min + 1
+            const step2 = Math.random() * step1;
+            const result = Math.floor(step2) + min;
+            return result;
+        }
+
+        var target = 0
+        var pet = 30;
+        document.getElementById("gernerated_array").innerHTML = ` <h1>The Array generated is <span class="arrr">${array}</span><h1>`
+        var target_arr = []
+        var pet_remaining = []
+
+
+
+        while (1) {
+            step = ramdomNum()
+            console.log(step)
+            target = target + step
+            target_arr.push(target)
+
+            pet = pet - step
+
+            pet_remaining.push(pet)
+            // document.getElementById("petrr").innerHTML = ` <li>the petrol Remaining ${pet_remaining}</li>`
+
+            if (pet < 0) {
+                document.getElementById("result").innerHTML = ` <li class="no_reach">Alas! Better Luck Next time <span style='font-size:100px;'>&#128531;</span>  </li>`
+
+                console.log('Not Reachable')
+                break
+            }
+            for (let i = 0; i < 5; i++) {
+                if (target == array[i]) {
+                    pet = pet + 20
+                    break
+                }
+            }
+            if (target >= 100) {
+                document.getElementById("result").innerHTML = ` <li class="reach">Hurrey You reached <span style='font-size:100px;'>&#128512;</span></li>`
+
+                console.log("reached")
+                break
+            }
+        }
+
+
+
+
+        // document.getElementById("steps").innerHTML = ` <li>the target value ${target_arr}</li>`
+        console.log(target_arr)
+        let str = ''
+        for (let i = 0; i <= target_arr.length - 1; i++) {
+            str += `<div class="main">THE CAR IS AT ${target_arr[i]}   </div>`
+
+            console.log(target_arr[i])
+        }
+        document.getElementById("steps").innerHTML = str
+
+
+        let strr = ''
+        for (let i = 0; i <= pet_remaining.length - 1; i++) {
+            strr += `<div class="main" > THE PETROL REMAINING ${pet_remaining[i]}</div>`
+
+        }
+        document.getElementById("petrr").innerHTML = strr
+
+    
+
+    </script>
+</body>
+
+</html>
